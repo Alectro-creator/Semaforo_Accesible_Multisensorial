@@ -1,0 +1,283 @@
+
+# Semáforo Accesible Multisensorial
+
+## 1. Presentación del proyecto
+
+**Autor:** Jorge Alejandro Rodríguez Garrido
+
+**Institución:** Instituto de Educación Superior
+Tecnológico Público Jorge Basadre
+
+**Proyecto:** Semáforo Accesible Multisensorial
+
+### Descripción
+
+El proyecto consiste en el desarrollo de un semáforo
+interactivo utilizando HTML, CSS y JavaScript.
+
+Su finalidad es simular el funcionamiento de un
+semáforo mediante señales visuales, sonidos,
+anuncios de voz y animaciones.
+
+Además, incorpora características de accesibilidad
+para facilitar la interacción con diferentes usuarios.
+
+## 2. Objetivo del proyecto
+
+Desarrollar una aplicación web interactiva y
+accesible que integre Web Audio API, Web Speech API
+y GSAP para representar los estados de un semáforo.
+
+## 3. Tecnologías utilizadas
+
+- **HTML5:** estructura de la página web.
+- **CSS3:** diseño visual y adaptación a pantallas.
+- **JavaScript:** programación e interactividad.
+- **Web Audio API:** generación de sonidos.
+- **Web Speech API:** anuncios mediante voz.
+- **GSAP:** animaciones y sincronización.
+- **esbuild:** compilación de módulos JavaScript.
+- **GitHub Pages:** publicación del proyecto.
+
+## 4. Funcionamiento del semáforo
+
+El semáforo presenta tres estados:
+
+| Estado | Duración | Indicación |
+|---|---|---|
+| Rojo | 3 segundos | Alto. Debes esperar. |
+| Verde | 3 segundos | Puedes avanzar si es seguro. |
+| Amarillo | 1 segundo | Precaución. Prepárate para detenerte. |
+
+Cada estado incorpora:
+
+- Iluminación de la luz correspondiente.
+- Animación visual mediante GSAP.
+- Sonido diferenciado.
+- Anuncio de voz.
+- Patrón de vibración cuando es compatible.
+
+### Controles interactivos
+
+**Iniciar:** activa el ciclo automático.
+
+**Detener:** detiene el ciclo automático.
+
+**Cambiar luz:** permite cambiar manualmente
+el estado del semáforo.
+
+**Silenciar:** desactiva los sonidos y los
+anuncios de voz.
+
+## 5. Implementación de Web Audio API
+
+Web Audio API permite generar sonidos directamente
+desde JavaScript, sin utilizar archivos MP3.
+
+Se utilizaron las siguientes funciones:
+
+- AudioContext: inicializa el sistema de audio.
+- createOscillator(): genera tonos.
+- createGain(): controla el volumen.
+- frequency: establece las frecuencias.
+- setValueAtTime(): define valores iniciales.
+- exponentialRampToValueAtTime(): permite
+  realizar cambios progresivos de volumen.
+
+Cada luz tiene una frecuencia y un patrón
+de sonido diferente.
+
+Los sonidos utilizan envolventes de volumen
+para evitar cambios bruscos al comenzar
+y terminar su reproducción.
+
+## 6. Implementación de Web Speech API
+
+Web Speech API permite convertir texto en voz.
+
+Se utilizó SpeechSynthesisUtterance para
+generar los anuncios correspondientes
+a cada estado.
+
+Los mensajes son:
+
+- Rojo: "Luz roja. Debes detenerte".
+- Verde: "Luz verde. Puedes avanzar".
+- Amarillo: "Amarillo".
+
+La configuración prioriza el idioma español
+de Perú cuando existe una voz compatible.
+
+También se implementó la verificación de
+compatibilidad y la cancelación de anuncios
+anteriores para evitar su acumulación.
+
+## 7. Implementación de GSAP
+
+GSAP permite crear animaciones fluidas
+y controlar su secuencia de ejecución.
+
+En el proyecto se utilizaron:
+
+- gsap.timeline()
+- fromTo()
+- to()
+- timeline.call()
+- duration
+- scale
+- ease
+
+Las luces realizan un efecto de ampliación
+y regresan suavemente a su tamaño original.
+
+Mediante timeline.call() se coordina
+el inicio del sonido, la voz y la vibración
+con la animación visual del semáforo.
+
+## 8. Accesibilidad
+
+El proyecto incorpora las siguientes
+características de accesibilidad:
+
+### Información visual y auditiva
+
+Cada estado presenta mensajes en pantalla,
+sonidos diferenciados y anuncios de voz.
+
+### Control de silencio
+
+El usuario puede desactivar los sonidos
+y los anuncios de voz cuando lo desee.
+
+### Movimiento reducido
+
+Se utiliza prefers-reduced-motion para
+respetar la configuración de accesibilidad
+del usuario.
+
+Cuando se solicita reducir el movimiento,
+se omiten las animaciones de ampliación
+sin interrumpir el funcionamiento del semáforo.
+
+### Navegación mediante teclado
+
+Los botones utilizan elementos HTML
+interactivos y cuentan con indicadores
+visuales de enfoque.
+
+### Vibración
+
+Se implementó navigator.vibrate() para
+proporcionar vibración en dispositivos
+y navegadores compatibles.
+
+La disponibilidad de la API no garantiza
+que todos los dispositivos puedan vibrar.
+
+### Compatibilidad del navegador
+
+La aplicación verifica la disponibilidad de:
+
+- Web Audio API.
+- Web Speech API.
+- GSAP.
+- API de vibración.
+
+## 9. Organización modular del código
+
+Para mejorar la organización, el mantenimiento
+y la comprensión del código, se utilizaron
+módulos JavaScript.
+
+### Archivos principales
+
+- index.html: estructura de la aplicación.
+- estilos.css: diseño visual y accesibilidad.
+- script.js: lógica y coordinación principal.
+- script.bundle.js: versión compilada del programa.
+
+### Carpeta modulos
+
+- estados.js: configuración de las luces,
+  duración, mensajes, sonidos y vibraciones.
+
+- audio.js: generación de sonidos mediante
+  Web Audio API.
+
+- voz.js: anuncios mediante Web Speech API.
+
+- animaciones.js: animaciones y sincronización
+  mediante GSAP.
+
+Los módulos utilizan import y export para
+compartir funciones y configuraciones.
+
+### Compilación con esbuild
+
+Para permitir la ejecución de la aplicación
+desde el Explorador de archivos de Windows,
+se utilizó esbuild.
+
+Esta herramienta reúne los módulos JavaScript
+en el archivo script.bundle.js.
+
+Los archivos originales se conservan
+para facilitar su revisión y mantenimiento.
+
+Comando utilizado:
+
+`npx.cmd --yes esbuild script.js --bundle --format=iife --outfile=script.bundle.js`
+
+## 10. Pruebas realizadas
+
+Se realizaron las siguientes comprobaciones:
+
+- Funcionamiento del ciclo automático.
+- Cambio manual de las luces.
+- Sonidos diferenciados por estado.
+- Anuncios de voz en español.
+- Animaciones sincronizadas mediante GSAP.
+- Funcionamiento de los cuatro botones.
+- Activación y desactivación del sonido.
+- Preferencia de movimiento reducido.
+- Visualización en pantallas móviles.
+- Detección de compatibilidad del navegador.
+- Revisión de errores en la consola de Chrome.
+- Ejecución mediante Visual Studio Code.
+- Ejecución desde el Explorador de Windows.
+- Funcionamiento desde GitHub Pages.
+
+Las pruebas funcionales realizadas resultaron
+satisfactorias.
+
+La vibración física depende de la compatibilidad
+del dispositivo utilizado.
+
+## 11. Publicación del proyecto
+
+El proyecto fue publicado mediante GitHub Pages.
+
+**Repositorio de GitHub:**
+
+https://github.com/Alectro-creator/Semaforo_Accesible_Multisensorial
+
+**Página web del semáforo:**
+
+https://alectro-creator.github.io/Semaforo_Accesible_Multisensorial/
+
+## 12. Conclusión
+
+El desarrollo del Semáforo Accesible Multisensorial
+permitió integrar diferentes tecnologías web
+para crear una aplicación interactiva.
+
+Se aplicaron conocimientos de HTML, CSS,
+JavaScript, Web Audio API, Web Speech API y GSAP.
+
+Asimismo, se implementaron características
+de accesibilidad y una organización modular
+del código para facilitar su mantenimiento.
+
+Finalmente, la aplicación fue publicada en
+GitHub Pages, permitiendo acceder al proyecto
+desde un navegador web compatible.
