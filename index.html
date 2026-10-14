@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b1220">
+
+  <title>Semáforo Accesible Multisensorial</title>
+
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+  <a href="#controles" class="saltar">
+    Saltar a los controles
+  </a>
+
+  <main class="contenedor">
+
+    <header class="encabezado">
+      <span class="etiqueta">PROYECTO INTERACTIVO</span>
+      <h1>Semáforo Accesible Multisensorial</h1>
+      <p>
+        Una experiencia interactiva con animaciones,
+        sonidos, voz y accesibilidad.
+      </p>
+    </header>
+
+    <section class="panel" aria-label="Simulador de semáforo">
+
+      <!-- Representación visual del semáforo -->
+      <div class="zona-semaforo">
+
+        <div id="semaforo" class="semaforo"
+             role="img"
+             aria-label="Semáforo en rojo">
+
+          <div id="luz-roja" class="luz roja activa"
+               aria-hidden="true"></div>
+
+          <div id="luz-amarilla" class="luz amarilla"
+               aria-hidden="true"></div>
+
+          <div id="luz-verde" class="luz verde"
+               aria-hidden="true"></div>
+
+        </div>
+
+        <div class="poste" aria-hidden="true"></div>
+
+      </div>
+
+      <!-- Estado y controles -->
+      <div class="zona-control">
+
+        <span class="etiqueta">ESTADO ACTUAL</span>
+
+        <h2 id="estado" role="status"
+            aria-live="polite" aria-atomic="true">
+          Luz roja
+        </h2>
+
+        <p id="indicacion">
+          Alto. Debes esperar.
+        </p>
+
+        <div id="controles" class="controles">
+
+          <button id="btn-iniciar" type="button">
+            Iniciar
+          </button>
+
+          <button id="btn-detener" type="button">
+            Detener
+          </button>
+
+          <button id="btn-cambiar" type="button">
+            Cambiar luz
+          </button>
+
+          <button id="btn-silencio" type="button"
+                  aria-pressed="false">
+            Silenciar
+          </button>
+
+        </div>
+
+        <section class="informacion"
+                 aria-label="Información de accesibilidad">
+
+          <h3>Accesibilidad</h3>
+
+          <p>
+            El semáforo ofrece indicaciones visuales
+            y auditivas para cada estado.
+          </p>
+
+          <p id="compatibilidad">
+            Comprobación de compatibilidad pendiente.
+          </p>
+
+        </section>
+
+      </div>
+
+    </section>
+
+    <footer class="pie">
+      <p>Web Audio API · Web Speech API · GSAP</p>
+      <p>IESTP Jorge Basadre - Mollendo</p>
+    </footer>
+
+  </main>
+
+  <!-- Biblioteca de animaciones GSAP -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+
+  <!-- Funcionalidades del semáforo -->
+ <script src="script.bundle.js"></script>
+
+</body>
+</html>
+        
